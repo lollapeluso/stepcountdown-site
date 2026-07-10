@@ -504,10 +504,137 @@
           linear-gradient(145deg, rgba(22,56,30,0.9), rgba(25,29,26,0.95));
       }
     }
+      .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    background: rgba(247, 251, 248, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  
+  .nav-inner {
+    width: min(calc(100% - 28px), var(--content-width));
+    min-height: 72px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.08rem;
+    font-weight: 780;
+    letter-spacing: -0.02em;
+  }
+  
+  .nav-brand img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nav-links a {
+    padding: 9px 13px;
+    border-radius: 999px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 680;
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--green-deep);
+    background: var(--green-soft);
+    outline: none;
+  }
+  
+  .nav-links a[aria-current="page"] {
+    color: var(--green-deep);
+    background: var(--green-soft);
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 14px;
+  }
+  
+  .footer-links a {
+    color: var(--green-dark);
+    text-decoration: none;
+    font-weight: 680;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 680px) {
+    .nav-inner {
+      min-height: 64px;
+    }
+  
+    .nav-brand span {
+      display: none;
+    }
+  
+    .nav-brand img {
+      width: 34px;
+      height: 34px;
+    }
+  
+    .nav-links {
+      gap: 2px;
+    }
+  
+    .nav-links a {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .site-nav {
+      background: rgba(13, 16, 14, 0.88);
+    }
+  }
   </style>
 </head>
 
 <body>
+   <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Nudge home">
+        <img src="assets/nudge-logo.png" alt="" />
+        <span>Nudge</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </div>
+    </div>
+  </nav>
   <div class="page">
     <header class="hero">
       <div class="hero-copy">
@@ -729,14 +856,18 @@
     </main>
 
     <footer>
-      Nudge uses Apple Health, with your permission, to read step data.
-      Calorie estimates and step recommendations are provided for general
-      wellness purposes only and are not intended as medical advice.
-    </footer>
+  <div>
+    Nudge uses Apple Health, with your permission, to read step data.
+    Calorie estimates and step recommendations are provided for general
+    wellness purposes only and are not intended as medical advice.
   </div>
-  <p>
-    <a href="privacy.html">Privacy Policy</a> |
+
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
     <a href="support.html">Support</a>
-  </p>
+  </div>
+</footer>
+  </div>
 </body>
 </html>
