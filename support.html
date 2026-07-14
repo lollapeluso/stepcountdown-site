@@ -1,11 +1,295 @@
-<h1>Step Countdown Support</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>Need help with Step Countdown?</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<p>Email: <a href=mailto:chris@hapalabs.com>chris@hapalabs.com</a></p>
+    <title>Nudge | Support</title>
 
-<p>
-For support, bug reports, or feedback, please contact us by email.
-</p>
+    <meta name="theme-color" content="#34C759">
 
-<p><a href="index.html">Back to Home</a></p>
+    <style>
+        :root {
+            --green: #34C759;
+            --green-dark: #1d9f43;
+            --green-soft: #eaf9ee;
+            --background: #f5f7f5;
+            --surface: rgba(255,255,255,.92);
+            --text: #171917;
+            --muted: #626862;
+            --border: rgba(23,25,23,.09);
+            --shadow: 0 18px 50px rgba(20,65,31,.10);
+            --content-width: 1120px;
+            --radius-xl: 34px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "SF Pro Display",
+                "Helvetica Neue",
+                Arial,
+                sans-serif;
+            background:
+                radial-gradient(circle at 12% 0%, rgba(52,199,89,.18), transparent 30rem),
+                linear-gradient(180deg,#f7fbf8 0%,#f5f7f5 100%);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(18px);
+            background: rgba(247,251,248,.88);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            width: min(calc(100% - 28px), var(--content-width));
+            margin: auto;
+            min-height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 750;
+        }
+
+        .nav-brand img {
+            width: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-weight: 650;
+        }
+
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            background: var(--green-soft);
+            color: var(--green-dark);
+        }
+
+        .page {
+            width: min(calc(100% - 28px), var(--content-width));
+            margin: auto;
+            padding: 30px 0 70px;
+        }
+
+        .hero {
+            padding: 70px;
+            text-align: center;
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(145deg,#ffffff,#eefaf1);
+            box-shadow: var(--shadow);
+        }
+
+        .hero img {
+            width: 72px;
+            margin: auto auto 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(3rem,7vw,5rem);
+            letter-spacing: -.05em;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 20px auto 0;
+            color: var(--muted);
+            font-size: 1.2rem;
+        }
+
+        .card {
+            margin-top: 28px;
+            padding: 48px;
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            box-shadow: 0 10px 30px rgba(20,65,31,.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--green-dark);
+            letter-spacing: -.02em;
+        }
+
+        p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--green-dark);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .email {
+            display: inline-block;
+            margin: 12px 0 30px;
+            padding: 14px 20px;
+            background: var(--green-soft);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 28px;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        footer {
+            text-align: center;
+            color: #757b75;
+            font-size: .85rem;
+            margin-top: 40px;
+        }
+
+        @media (max-width:700px) {
+
+            .hero {
+                padding: 45px 24px;
+            }
+
+            .card {
+                padding: 30px 24px;
+            }
+
+            .nav-brand span {
+                display: none;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+
+        <a class="nav-brand" href="index.html">
+            <img src="assets/nudge-logo.png" alt="">
+            <span>Nudge</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="support.html" aria-current="page">Support</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="page">
+
+    <section class="hero">
+
+        <img src="assets/nudge-logo.png" alt="Nudge">
+
+        <h1>Support</h1>
+
+        <p>
+            Need help with Nudge? We're happy to help with questions,
+            bug reports, feature requests, or feedback.
+        </p>
+
+    </section>
+
+    <section class="card">
+
+        <h2>Contact Us</h2>
+
+        <p>
+            The fastest way to reach us is by email.
+        </p>
+
+        <a class="email" href="mailto:chris@hapalabs.com">
+            chris@hapalabs.com
+        </a>
+
+        <div class="faq">
+
+            <div class="faq-item">
+                <h3>Found a bug?</h3>
+                <p>
+                    Please include your iPhone model, Apple Watch model,
+                    watchOS version, and a description of what happened.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Have an idea?</h3>
+                <p>
+                    We'd love to hear it. Many of Nudge's best ideas come
+                    directly from users.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Questions about privacy?</h3>
+                <p>
+                    See our <a href="privacy.html">Privacy Policy</a> for
+                    details about how Nudge uses Apple Health data.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        © 2026 Nudge. All rights reserved.
+
+    </footer>
+
+</div>
+
+</body>
+
+</html>
