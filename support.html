@@ -222,6 +222,73 @@
             }
 
         }
+        .nav-store img {
+    height: 44px;
+    width: auto;
+    transition: transform .2s ease;
+}
+
+.nav-store img:hover {
+    transform: scale(1.04);
+}
+
+@media (max-width:900px){
+
+.nav-store{
+    display:none;
+}
+
+}
+        .download-section{
+
+    margin-top:40px;
+    padding:60px 30px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    background:
+    linear-gradient(
+    145deg,
+    #effbf2,
+    #ffffff);
+
+}
+
+.download-section h2{
+
+    margin-bottom:14px;
+
+    font-size:2.4rem;
+
+}
+
+.download-section p{
+
+    max-width:650px;
+
+    margin:0 auto 28px;
+
+}
+
+.app-store-badge{
+
+    height:64px;
+
+    width:auto;
+
+    margin:auto;
+
+    transition:.2s;
+
+}
+
+.app-store-badge:hover{
+
+    transform:scale(1.05);
+
+}
     </style>
 
 </head>
@@ -238,10 +305,22 @@
 
         <div class="nav-links">
             <a href="index.html">Home</a>
+            <a href="whatsnew.html">What’s New</a>
             <a href="privacy.html">Privacy</a>
             <a href="support.html" aria-current="page">Support</a>
         </div>
+        <div class="nav-store">
+  <a
+    href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
+    target="_blank"
+    rel="noopener noreferrer">
 
+    <img
+      src="assets/download-on-the-app-store.svg"
+      alt="Download on the App Store">
+
+  </a>
+</div>
     </div>
 </nav>
 
@@ -305,15 +384,33 @@
        <footer>
 
       <div>© 2026 Nudge. All rights reserved.</div>
+           <section class="download-section">
+
+    <h2>Ready to get moving?</h2>
+
+    <p>
+        Download Nudge today and start building a daily movement habit.
+    </p>
+
+    <a
+      href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
+      target="_blank"
+      rel="noopener noreferrer">
+
+        <img
+          class="app-store-badge"
+          src="assets/download-on-the-app-store.svg"
+          alt="Download on the App Store">
+
+    </a>
+
+</section>
 
       <div class="footer-links">
-
         <a href="index.html">Home</a>
-
+        <a href="whatsnew.html">What’s New</a>
         <a href="privacy.html">Privacy Policy</a>
-
         <a href="support.html">Support</a>
-
       </div>
 
     </footer>
