@@ -13,7 +13,11 @@
 
   <meta name="theme-color" content="#34c759" />
 
-  <link rel="icon" type="image/png" href="assets/nudge-logo.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="assets/nudge-logo.png"
+  />
 
   <style>
     :root {
@@ -77,12 +81,14 @@
       color: inherit;
     }
 
+    /* Navigation */
+
     .site-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid var(--border);
-      background: rgba(247, 251, 248, 0.88);
+      background: rgba(247, 251, 248, 0.92);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
@@ -101,6 +107,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      flex-shrink: 0;
       color: var(--text);
       text-decoration: none;
       font-size: 1.08rem;
@@ -108,81 +115,144 @@
       letter-spacing: -0.02em;
     }
 
+    .nav-brand:hover {
+      text-decoration: none;
+    }
+
     .nav-brand img {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+    }
+
+    .nav-links a,
+    .mobile-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 680;
     }
 
     .nav-links a {
       padding: 9px 13px;
       border-radius: 999px;
-      color: var(--muted);
-      text-decoration: none;
       font-size: 0.95rem;
-      font-weight: 680;
+      white-space: nowrap;
       transition:
         color 0.2s ease,
         background 0.2s ease;
     }
 
     .nav-links a:hover,
-    .nav-links a:focus-visible {
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="page"],
+    .mobile-menu a:hover,
+    .mobile-menu a:focus-visible,
+    .mobile-menu a[aria-current="page"] {
       color: var(--green-deep);
       background: var(--green-soft);
+      text-decoration: none;
       outline: none;
     }
 
-    .nav-links a[aria-current="page"] {
-      color: var(--green-deep);
-      background: var(--green-soft);
+    .nav-store,
+    .nav-store-mobile {
+      display: inline-flex;
+      flex-shrink: 0;
     }
+
+    .nav-store img {
+      width: auto;
+      height: 40px;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-store img:hover {
+      transform: scale(1.04);
+    }
+
+    .nav-store-mobile img {
+      width: auto;
+      height: 34px;
+    }
+
+    .nav-mobile-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: grid;
+      place-content: center;
+      gap: 5px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-solid);
+      cursor: pointer;
+    }
+
+    .menu-button span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text);
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .menu-button[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-button[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-button[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      width: min(calc(100% - 28px), var(--content-width));
+      margin: 0 auto;
+      padding: 0 0 14px;
+    }
+
+    .mobile-menu.open {
+      display: grid;
+    }
+
+    .mobile-menu a {
+      padding: 14px 16px;
+      border-radius: 14px;
+    }
+
+    /* Page layout */
 
     .page {
       width: min(calc(100% - 28px), var(--content-width));
       margin: 0 auto;
       padding: 30px 0 72px;
     }
-    .nav-store img {
-    height: 44px;
-    width: auto;
-    transition: transform .2s ease;
-    }
-    
-    .nav-store img:hover {
-        transform: scale(1.04);
-    }
-    
-    @media (max-width:900px){
-    
-    .nav-store{
-        display:none;
-    }
-    
-    }
-        .nav-store img {
-        height: 44px;
-        width: auto;
-        transition: transform .2s ease;
-    }
-    
-    .nav-store img:hover {
-        transform: scale(1.04);
-    }
-    
-    @media (max-width:900px){
-    
-    .nav-store{
-        display:none;
-    }
-    
-    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -283,6 +353,7 @@
       background: var(--surface);
       box-shadow: 0 10px 30px rgba(20, 65, 31, 0.05);
       backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .release-card.latest {
@@ -467,7 +538,49 @@
       font-size: 1.08rem;
     }
 
-    footer {
+    /* Download section */
+
+    .download-section {
+      margin-top: 28px;
+      padding: 58px 30px;
+      text-align: center;
+      border-radius: 28px;
+      background:
+        linear-gradient(
+          145deg,
+          #effbf2,
+          #ffffff
+        );
+      box-shadow: 0 10px 30px rgba(20, 65, 31, 0.05);
+    }
+
+    .download-section h2 {
+      margin-bottom: 14px;
+      color: var(--text);
+      font-size: clamp(2rem, 5vw, 2.7rem);
+    }
+
+    .download-section p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .app-store-badge {
+      width: auto;
+      height: 64px;
+      margin: 0 auto;
+      transition: transform 0.2s ease;
+    }
+
+    .app-store-badge:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+
+    .site-footer {
       padding: 34px 18px 0;
       text-align: center;
       color: #757b75;
@@ -489,9 +602,12 @@
       font-weight: 680;
     }
 
-    .footer-links a:hover {
+    .footer-links a:hover,
+    .footer-links a[aria-current="page"] {
       text-decoration: underline;
     }
+
+    /* Responsive layout */
 
     @media (max-width: 900px) {
       .hero {
@@ -508,29 +624,25 @@
       }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 820px) {
       .nav-inner {
-        min-height: 64px;
+        min-height: 66px;
+      }
+
+      .nav-desktop {
+        display: none;
+      }
+
+      .nav-mobile-actions {
+        display: flex;
       }
 
       .nav-brand span {
         display: none;
       }
+    }
 
-      .nav-brand img {
-        width: 34px;
-        height: 34px;
-      }
-
-      .nav-links {
-        gap: 2px;
-      }
-
-      .nav-links a {
-        padding: 8px 9px;
-        font-size: 0.86rem;
-      }
-
+    @media (max-width: 680px) {
       .page {
         width: min(calc(100% - 18px), var(--content-width));
         padding-top: 18px;
@@ -563,14 +675,28 @@
       .initial-release-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 520px) {
-      .nav-links a {
-        padding: 8px 7px;
-        font-size: 0.8rem;
+      .download-section {
+        padding: 42px 24px;
+      }
+
+      .app-store-badge {
+        height: 56px;
       }
     }
+
+    @media (max-width: 430px) {
+      .nav-store-mobile img {
+        height: 31px;
+      }
+
+      .menu-button {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    /* Dark mode */
 
     @media (prefers-color-scheme: dark) {
       :root {
@@ -595,7 +721,7 @@
       }
 
       .site-nav {
-        background: rgba(13, 16, 14, 0.88);
+        background: rgba(13, 16, 14, 0.92);
       }
 
       .hero {
@@ -608,7 +734,19 @@
           );
       }
 
-      .coming-soon {
+      .release-card {
+        border-color: rgba(255, 255, 255, 0.09);
+        background: rgba(25, 29, 26, 0.92);
+      }
+
+      .change-group,
+      .initial-release-grid li {
+        border-color: rgba(255, 255, 255, 0.09);
+        background: #1b201c;
+      }
+
+      .coming-soon,
+      .download-section {
         background:
           linear-gradient(
             145deg,
@@ -617,89 +755,116 @@
           );
       }
     }
-    .download-section{
-
-    margin-top:40px;
-    padding:60px 30px;
-
-    text-align:center;
-
-    border-radius:28px;
-
-    background:
-    linear-gradient(
-    145deg,
-    #effbf2,
-    #ffffff);
-
-}
-
-.download-section h2{
-
-    margin-bottom:14px;
-
-    font-size:2.4rem;
-
-}
-
-.download-section p{
-
-    max-width:650px;
-
-    margin:0 auto 28px;
-
-}
-
-.app-store-badge{
-
-    height:64px;
-
-    width:auto;
-
-    margin:auto;
-
-    transition:.2s;
-
-}
-
-.app-store-badge:hover{
-
-    transform:scale(1.05);
-
-}
   </style>
 </head>
 
 <body>
   <nav class="site-nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a class="nav-brand" href="index.html" aria-label="Nudge home">
-        <img src="assets/nudge-logo.png" alt="" />
+      <a
+        class="nav-brand"
+        href="index.html"
+        aria-label="Nudge home"
+      >
+        <img
+          src="assets/nudge-logo.png"
+          alt=""
+        />
+
         <span>Nudge</span>
       </a>
 
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="whatsnew.html" aria-current="page">What’s New</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="support.html">Support</a>
+      <div class="nav-desktop">
+        <div class="nav-links">
+          <a href="index.html">
+            Home
+          </a>
+
+          <a
+            href="whatsnew.html"
+            aria-current="page"
+          >
+            What’s New
+          </a>
+
+          <a href="privacy.html">
+            Privacy
+          </a>
+
+          <a href="support.html">
+            Support
+          </a>
+        </div>
+
+        <a
+          class="nav-store"
+          href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download Nudge on the App Store"
+        >
+          <img
+            src="assets/download-on-the-app-store.svg"
+            alt="Download on the App Store"
+          />
+        </a>
       </div>
-      <div class="nav-store">
-  <a
-    href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
-    target="_blank"
-    rel="noopener noreferrer">
 
-    <img
-      src="assets/download-on-the-app-store.svg"
-      alt="Download on the App Store">
+      <div class="nav-mobile-actions">
+        <a
+          class="nav-store-mobile"
+          href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download Nudge on the App Store"
+        >
+          <img
+            src="assets/download-on-the-app-store.svg"
+            alt="Download on the App Store"
+          />
+        </a>
 
-  </a>
-</div>
+        <button
+          class="menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="mobile-menu"
+      id="mobile-menu"
+    >
+      <a href="index.html">
+        Home
+      </a>
+
+      <a
+        href="whatsnew.html"
+        aria-current="page"
+      >
+        What’s New
+      </a>
+
+      <a href="privacy.html">
+        Privacy
+      </a>
+
+      <a href="support.html">
+        Support
+      </a>
     </div>
   </nav>
 
-  <div class="page">
+  <!-- CONTINUE WITH PART 2 DIRECTLY BELOW THIS LINE -->
+    <div class="page">
     <header class="hero">
       <div class="hero-copy">
         <div class="brand-row">
@@ -708,7 +873,9 @@
             alt="Nudge footprint logo"
           />
 
-          <p class="eyebrow">Nudge: Your Step Coach</p>
+          <p class="eyebrow">
+            Nudge: Your Step Coach
+          </p>
         </div>
 
         <h1>What’s New</h1>
@@ -735,18 +902,26 @@
       <article class="release-card latest">
         <div class="release-header">
           <div class="release-title-wrap">
-            <p class="section-label">Latest Release</p>
+            <p class="section-label">
+              Latest Release
+            </p>
+
             <h2>Version 1.1</h2>
-            <p class="release-date">Released July 2026</p>
+
+            <p class="release-date">
+              Released July 2026
+            </p>
           </div>
 
-          <span class="version-badge">Current version</span>
+          <span class="version-badge">
+            Current version
+          </span>
         </div>
 
         <p class="release-summary">
-          Version 1.1 introduces the new Nudge identity, improves the first-time
-          experience, expands step history, and refines performance throughout
-          the iPhone and Apple Watch apps.
+          Version 1.1 introduces the new Nudge identity, improves the
+          first-time experience, expands step history, and refines
+          performance throughout the iPhone and Apple Watch apps.
         </p>
 
         <div class="change-groups">
@@ -757,10 +932,21 @@
             </h3>
 
             <ul>
-              <li>New Nudge name, branding, and visual identity</li>
-              <li>Welcome experience for first-time users</li>
-              <li>Expanded daily and weekly step history</li>
-              <li>Additional historical data collection for future insights</li>
+              <li>
+                New Nudge name, branding, and visual identity
+              </li>
+
+              <li>
+                Welcome experience for first-time users
+              </li>
+
+              <li>
+                Expanded daily and weekly step history
+              </li>
+
+              <li>
+                Additional historical data collection for future insights
+              </li>
             </ul>
           </section>
 
@@ -771,10 +957,21 @@
             </h3>
 
             <ul>
-              <li>Refined Apple Watch complication experience</li>
-              <li>Improved navigation and usability</li>
-              <li>More reliable Apple Health step updates</li>
-              <li>Refined countdown and walking-time calculations</li>
+              <li>
+                Refined Apple Watch complication experience
+              </li>
+
+              <li>
+                Improved navigation and usability
+              </li>
+
+              <li>
+                More reliable Apple Health step updates
+              </li>
+
+              <li>
+                Refined countdown and walking-time calculations
+              </li>
             </ul>
           </section>
 
@@ -785,10 +982,21 @@
             </h3>
 
             <ul>
-              <li>Improved synchronization between iPhone and Apple Watch</li>
-              <li>Improved reliability when refreshing step counts</li>
-              <li>Performance and responsiveness improvements</li>
-              <li>General bug fixes and interface refinements</li>
+              <li>
+                Improved synchronization between iPhone and Apple Watch
+              </li>
+
+              <li>
+                Improved reliability when refreshing step counts
+              </li>
+
+              <li>
+                Performance and responsiveness improvements
+              </li>
+
+              <li>
+                General bug fixes and interface refinements
+              </li>
             </ul>
           </section>
         </div>
@@ -797,12 +1005,20 @@
       <article class="release-card">
         <div class="release-header">
           <div class="release-title-wrap">
-            <p class="section-label">Previous Release</p>
+            <p class="section-label">
+              Previous Release
+            </p>
+
             <h2>Version 1.0</h2>
-            <p class="release-date">Released June 2026</p>
+
+            <p class="release-date">
+              Released June 2026
+            </p>
           </div>
 
-          <span class="version-badge">Initial release</span>
+          <span class="version-badge">
+            Initial release
+          </span>
         </div>
 
         <p class="release-summary">
@@ -827,9 +1043,13 @@
       </article>
 
       <section class="release-card coming-soon">
-        <p class="section-label">Looking Ahead</p>
+        <p class="section-label">
+          Looking Ahead
+        </p>
 
-        <h2>We’re just getting started.</h2>
+        <h2>
+          We’re just getting started.
+        </h2>
 
         <p>
           Future versions of Nudge will continue expanding coaching,
@@ -839,36 +1059,100 @@
       </section>
     </main>
 
-    <footer>
-      <div>© 2026 Nudge. All rights reserved.</div>
-      <section class="download-section">
+    <section class="download-section">
+      <h2>
+        Ready to get moving?
+      </h2>
 
-    <h2>Ready to get moving?</h2>
-
-    <p>
+      <p>
         Download Nudge today and start building a daily movement habit.
-    </p>
+      </p>
 
-    <a
-      href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
-      target="_blank"
-      rel="noopener noreferrer">
-
+      <a
+        href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download Nudge on the App Store"
+      >
         <img
           class="app-store-badge"
           src="assets/download-on-the-app-store.svg"
-          alt="Download on the App Store">
+          alt="Download on the App Store"
+        />
+      </a>
+    </section>
 
-    </a>
+    <footer class="site-footer">
+      <div>
+        © 2026 Nudge. All rights reserved.
+      </div>
 
-</section>
       <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="whatsnew.html">What’s New</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="support.html">Support</a>
+        <a href="index.html">
+          Home
+        </a>
+
+        <a
+          href="whatsnew.html"
+          aria-current="page"
+        >
+          What’s New
+        </a>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+        <a href="support.html">
+          Support
+        </a>
       </div>
     </footer>
   </div>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener("click", () => {
+        const isOpen =
+          menuButton.getAttribute("aria-expanded") === "true";
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          String(!isOpen)
+        );
+
+        menuButton.setAttribute(
+          "aria-label",
+          isOpen
+            ? "Open navigation menu"
+            : "Close navigation menu"
+        );
+
+        mobileMenu.classList.toggle(
+          "open",
+          !isOpen
+        );
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          menuButton.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+          );
+
+          mobileMenu.classList.remove("open");
+        });
+      });
+    }
+  </script>
 </body>
 </html>
