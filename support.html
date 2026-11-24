@@ -1,829 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Nudge | Support</title>
-
-  <meta
-    name="description"
-    content="Get support, report a bug, or share feedback about Nudge."
-  />
-
-  <meta name="theme-color" content="#34c759" />
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="assets/nudge-logo.png"
-  />
-
-  <style>
-    :root {
-      --green: #34c759;
-      --green-dark: #1d9f43;
-      --green-deep: #0f6f2b;
-      --green-soft: #eaf9ee;
-      --background: #f5f7f5;
-      --surface: rgba(255, 255, 255, 0.92);
-      --surface-solid: #ffffff;
-      --text: #171917;
-      --muted: #626862;
-      --border: rgba(23, 25, 23, 0.09);
-      --shadow: 0 18px 50px rgba(20, 65, 31, 0.10);
-      --content-width: 1120px;
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(
-          circle at 12% 0%,
-          rgba(52, 199, 89, 0.18),
-          transparent 30rem
-        ),
-        linear-gradient(
-          180deg,
-          #f7fbf8 0%,
-          var(--background) 100%
-        );
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    a {
-      color: var(--green-dark);
-      text-decoration: none;
-      font-weight: 650;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Navigation */
-
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-      background: rgba(247, 251, 248, 0.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .nav-inner {
-      width: min(calc(100% - 28px), var(--content-width));
-      min-height: 72px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.08rem;
-      font-weight: 780;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-brand:hover {
-      text-decoration: none;
-    }
-
-    .nav-brand img {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-    }
-
-    .nav-desktop {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-links a,
-    .mobile-menu a {
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 680;
-    }
-
-    .nav-links a {
-      padding: 9px 13px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      white-space: nowrap;
-      transition:
-        color 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible,
-    .nav-links a[aria-current="page"],
-    .mobile-menu a:hover,
-    .mobile-menu a:focus-visible,
-    .mobile-menu a[aria-current="page"] {
-      color: var(--green-deep);
-      background: var(--green-soft);
-      text-decoration: none;
-      outline: none;
-    }
-
-    .nav-store,
-    .nav-store-mobile {
-      display: inline-flex;
-      flex-shrink: 0;
-    }
-
-    .nav-store img {
-      width: auto;
-      height: 40px;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-store img:hover {
-      transform: scale(1.04);
-    }
-
-    .nav-store-mobile img {
-      width: auto;
-      height: 34px;
-    }
-
-    .nav-mobile-actions {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-button {
-      width: 44px;
-      height: 44px;
-      padding: 0;
-      display: grid;
-      place-content: center;
-      gap: 5px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--surface-solid);
-      cursor: pointer;
-    }
-
-    .menu-button span {
-      display: block;
-      width: 20px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--text);
-      transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-    }
-
-    .menu-button[aria-expanded="true"] span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .menu-button[aria-expanded="true"] span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-button[aria-expanded="true"] span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .mobile-menu {
-      display: none;
-      width: min(calc(100% - 28px), var(--content-width));
-      margin: 0 auto;
-      padding: 0 0 14px;
-    }
-
-    .mobile-menu.open {
-      display: grid;
-    }
-
-    .mobile-menu a {
-      padding: 14px 16px;
-      border-radius: 14px;
-    }
-
-    /* Page layout */
-
-    .page {
-      width: min(calc(100% - 28px), var(--content-width));
-      margin: 0 auto;
-      padding: 30px 0 72px;
-    }
-
-    .hero {
-      padding: 68px 40px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.98),
-          rgba(238, 250, 241, 0.97)
-        );
-      box-shadow: var(--shadow);
-    }
-
-    .hero img {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 20px;
-      object-fit: contain;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-    .hero p {
-      max-width: 680px;
-      margin: 20px auto 0;
-      color: var(--muted);
-      font-size: 1.2rem;
-    }
-
-    .card {
-      max-width: 900px;
-      margin: 28px auto 0;
-      padding: 48px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      box-shadow: 0 10px 30px rgba(20, 65, 31, 0.05);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    h2 {
-      margin: 0 0 12px;
-      color: var(--green-dark);
-      font-size: 1.55rem;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-    }
-
-    h3 {
-      margin: 0 0 8px;
-      color: var(--text);
-      font-size: 1.15rem;
-      line-height: 1.3;
-      letter-spacing: -0.015em;
-    }
-
-    p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    .email {
-      display: inline-block;
-      margin: 12px 0 30px;
-      padding: 14px 20px;
-      border-radius: 999px;
-      background: var(--green-soft);
-      color: var(--green-deep);
-      font-size: 1.1rem;
-      font-weight: 720;
-    }
-
-    .email:hover {
-      text-decoration: none;
-      background: #dcf5e3;
-    }
-
-    .faq {
-      display: grid;
-      gap: 16px;
-      margin-top: 34px;
-    }
-
-    .faq-item {
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--surface-solid);
-    }
-
-    /* Download section */
-
-    .download-section {
-      max-width: 900px;
-      margin: 28px auto 0;
-      padding: 58px 30px;
-      text-align: center;
-      border-radius: 28px;
-      background:
-        linear-gradient(
-          145deg,
-          #effbf2,
-          #ffffff
-        );
-      box-shadow: 0 10px 30px rgba(20, 65, 31, 0.05);
-    }
-
-    .download-section h2 {
-      margin-bottom: 14px;
-      color: var(--text);
-      font-size: clamp(2rem, 5vw, 2.7rem);
-    }
-
-    .download-section p {
-      max-width: 650px;
-      margin: 0 auto 28px;
-    }
-
-    .app-store-badge {
-      width: auto;
-      height: 64px;
-      margin: 0 auto;
-      transition: transform 0.2s ease;
-    }
-
-    .app-store-badge:hover {
-      transform: scale(1.05);
-    }
-
-    /* Footer */
-
-    .site-footer {
-      padding: 34px 18px 0;
-      text-align: center;
-      color: #757b75;
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      margin-top: 14px;
-    }
-
-    .footer-links a {
-      color: var(--green-dark);
-      text-decoration: none;
-      font-weight: 680;
-    }
-
-    .footer-links a:hover,
-    .footer-links a[aria-current="page"] {
-      text-decoration: underline;
-    }
-
-    /* Responsive navigation */
-
-    @media (max-width: 820px) {
-      .nav-inner {
-        min-height: 66px;
-      }
-
-      .nav-desktop {
-        display: none;
-      }
-
-      .nav-mobile-actions {
-        display: flex;
-      }
-
-      .nav-brand span {
-        display: none;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .page {
-        width: min(calc(100% - 18px), var(--content-width));
-        padding-top: 18px;
-      }
-
-      .hero {
-        padding: 48px 24px;
-        border-radius: 24px;
-      }
-
-      .hero img {
-        width: 62px;
-        height: 62px;
-      }
-
-      .card {
-        padding: 32px 24px;
-      }
-
-      .faq-item {
-        padding: 20px;
-      }
-
-      .download-section {
-        padding: 42px 24px;
-      }
-
-      .app-store-badge {
-        height: 56px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .nav-store-mobile img {
-        height: 31px;
-      }
-
-      .menu-button {
-        width: 42px;
-        height: 42px;
-      }
-    }
-
-    /* Dark mode */
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #0d100e;
-        --surface: rgba(25, 29, 26, 0.92);
-        --surface-solid: #1b201c;
-        --text: #f5f7f5;
-        --muted: #b6bdb7;
-        --border: rgba(255, 255, 255, 0.09);
-        --green-soft: rgba(52, 199, 89, 0.17);
-        --shadow: 0 20px 52px rgba(0, 0, 0, 0.30);
-      }
-
-      body {
-        background:
-          radial-gradient(
-            circle at 12% 0%,
-            rgba(52, 199, 89, 0.18),
-            transparent 30rem
-          ),
-          #0d100e;
-      }
-
-      .site-nav {
-        background: rgba(13, 16, 14, 0.92);
-      }
-
-      .hero {
-        border-color: rgba(255, 255, 255, 0.08);
-        background:
-          linear-gradient(
-            145deg,
-            rgba(27, 32, 28, 0.98),
-            rgba(18, 27, 20, 0.98)
-          );
-      }
-
-      .card {
-        border-color: rgba(255, 255, 255, 0.09);
-        background: rgba(25, 29, 26, 0.92);
-      }
-
-      .faq-item {
-        border-color: rgba(255, 255, 255, 0.09);
-        background: #1b201c;
-      }
-
-      .download-section {
-        background:
-          linear-gradient(
-            145deg,
-            rgba(22, 56, 30, 0.9),
-            rgba(25, 29, 26, 0.95)
-          );
-      }
-
-      .email:hover {
-        background: rgba(52, 199, 89, 0.25);
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Support | Nudge</title>
+<meta name="description" content="Help with Nudge setup, Apple Health, Watch, Nudge+ subscriptions, walking weather, and history controls.">
+<link rel="canonical" href="https://www.nudgestep.com/support.html">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Support | Nudge">
+<meta property="og:description" content="Help with Nudge setup, Apple Health, Watch, Nudge+ subscriptions, walking weather, and history controls.">
+<meta property="og:image" content="https://www.nudgestep.com/assets/v21/icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/v21/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/v21/icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer>
+</script>
 </head>
-
 <body>
-  <nav class="site-nav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a
-        class="nav-brand"
-        href="index.html"
-        aria-label="Nudge home"
-      >
-        <img
-          src="assets/nudge-logo.png"
-          alt=""
-        />
-
-        <span>Nudge</span>
-      </a>
-
-      <div class="nav-desktop">
-        <div class="nav-links">
-          <a href="index.html">
-            Home
-          </a>
-
-          <a href="whatsnew.html">
-            What’s New
-          </a>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a
-            href="support.html"
-            aria-current="page"
-          >
-            Support
-          </a>
-        </div>
-
-        <a
-          class="nav-store"
-          href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Download Nudge on the App Store"
-        >
-          <img
-            src="assets/download-on-the-app-store.svg"
-            alt="Download on the App Store"
-          />
-        </a>
-      </div>
-
-      <div class="nav-mobile-actions">
-        <a
-          class="nav-store-mobile"
-          href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Download Nudge on the App Store"
-        >
-          <img
-            src="assets/download-on-the-app-store.svg"
-            alt="Download on the App Store"
-          />
-        </a>
-
-        <button
-          class="menu-button"
-          type="button"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          aria-label="Open navigation menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="mobile-menu"
-      id="mobile-menu"
-    >
-      <a href="index.html">
-        Home
-      </a>
-
-      <a href="whatsnew.html">
-        What’s New
-      </a>
-
-      <a href="privacy.html">
-        Privacy
-      </a>
-
-      <a
-        href="support.html"
-        aria-current="page"
-      >
-        Support
-      </a>
-    </div>
-  </nav>
-
-  <div class="page">
-    <header class="hero">
-      <img
-        src="assets/nudge-logo.png"
-        alt="Nudge footprint logo"
-      />
-
-      <h1>Support</h1>
-
-      <p>
-        Need help with Nudge? We’re happy to help with questions,
-        bug reports, feature requests, or feedback.
-      </p>
-    </header>
-
-    <main class="card">
-      <h2>Contact Us</h2>
-
-      <p>
-        The fastest way to reach us is by email.
-      </p>
-
-      <a
-        class="email"
-        href="mailto:chris@hapalabs.com"
-      >
-        chris@hapalabs.com
-      </a>
-
-      <div class="faq">
-        <section class="faq-item">
-          <h3>Found a bug?</h3>
-
-          <p>
-            Please include your iPhone model, Apple Watch model,
-            iOS and watchOS versions, and a description of what happened.
-            Screenshots are also helpful.
-          </p>
-        </section>
-
-        <section class="faq-item">
-          <h3>Have an idea?</h3>
-
-          <p>
-            We’d love to hear it. Many of Nudge’s best ideas come directly
-            from users.
-          </p>
-        </section>
-
-        <section class="faq-item">
-          <h3>Having trouble with step data?</h3>
-
-          <p>
-            Confirm that Nudge has permission to read Steps in the Apple
-            Health app. You can review this under Health, Sharing, Apps and
-            Services, then Nudge.
-          </p>
-        </section>
-
-        <section class="faq-item">
-          <h3>Questions about privacy?</h3>
-
-          <p>
-            See our
-            <a href="privacy.html">Privacy Policy</a>
-            for details about how Nudge uses Apple Health data.
-          </p>
-        </section>
-      </div>
-    </main>
-
-    <section class="download-section">
-      <h2>Ready to get moving?</h2>
-
-      <p>
-        Download Nudge today and start building a daily movement habit.
-      </p>
-
-      <a
-        href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Download Nudge on the App Store"
-      >
-        <img
-          class="app-store-badge"
-          src="assets/download-on-the-app-store.svg"
-          alt="Download on the App Store"
-        />
-      </a>
-    </section>
-
-    <footer class="site-footer">
-      <div>
-        © 2026 Nudge. All rights reserved.
-      </div>
-
-      <div class="footer-links">
-        <a href="index.html">
-          Home
-        </a>
-
-        <a href="whatsnew.html">
-          What’s New
-        </a>
-
-        <a href="privacy.html">
-          Privacy Policy
-        </a>
-
-        <a
-          href="support.html"
-          aria-current="page"
-        >
-          Support
-        </a>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    const menuButton = document.querySelector(".menu-button");
-    const mobileMenu = document.querySelector(".mobile-menu");
-
-    if (menuButton && mobileMenu) {
-      menuButton.addEventListener("click", () => {
-        const isOpen =
-          menuButton.getAttribute("aria-expanded") === "true";
-
-        menuButton.setAttribute(
-          "aria-expanded",
-          String(!isOpen)
-        );
-
-        menuButton.setAttribute(
-          "aria-label",
-          isOpen
-            ? "Open navigation menu"
-            : "Close navigation menu"
-        );
-
-        mobileMenu.classList.toggle(
-          "open",
-          !isOpen
-        );
-      });
-
-      mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          menuButton.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-          menuButton.setAttribute(
-            "aria-label",
-            "Open navigation menu"
-          );
-
-          mobileMenu.classList.remove("open");
-        });
-      });
-    }
-  </script>
+<a class="skip" href="#main">Skip to content</a>
+<div class="release-note">
+<span>Nudge 2.1 is coming soon.</span> The App Store currently offers version 1.3.</div>
+<header class="site-header">
+<div class="nav-wrap">
+<a class="brand" href="index.html" aria-label="Nudge home">
+<img src="assets/v21/nudgie.png" width="48" height="48" alt="">
+<span>Nudge<span class="brand-dot">.</span>
+</span>
+</a>
+<nav aria-label="Main navigation" id="navigation">
+<a href="index.html#features">Features</a>
+<a href="index.html#plus">Nudge+</a>
+<a href="whatsnew.html">What’s new</a>
+<a href="support.html" aria-current="page">Support</a>
+</nav>
+<a class="nav-download" href="https://apps.apple.com/us/app/nudge-your-step-coach/id6785135263">Get Nudge <span class="version">1.3</span>
+</a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu</button>
+</div>
+</header>
+<main id="main" tabindex="-1" class="container reading">
+<div class="page-heading">
+<p class="eyebrow">A little help, when you need it</p>
+<h1>Let’s get you<br>
+moving again.</h1>
+<p class="lead">Setup tips and answers for the upcoming Nudge 2.1.</p>
+</div>
+<aside class="notice">
+<strong>Using version 1.3?</strong>
+<p>Some controls below arrive with 2.1. For the current version, check Apple Health step access and Watch installation, or email us for help.</p>
+</aside>
+<nav class="help-nav" aria-label="Support topics">
+<a href="#getting-started">Getting started</a>
+<a href="#subscriptions">Nudge+</a>
+<a href="#weather-help">Weather</a>
+<a href="#history">History &amp; privacy</a>
+<a href="#contact">Contact</a>
+</nav>
+<section class="help-section" id="getting-started">
+<h2>Getting started</h2>
+<details>
+<summary>Which devices can I use?</summary>
+<div class="answer">
+<p>Use a supported iPhone running iOS 17 or later. Apple Watch features require watchOS 10 or later. In 2.1, choose Apple Watch tracking for the wrist experience, or Apple Health tracking on iPhone without a Watch.</p>
+</div>
+</details>
+<details>
+<summary>Why are my steps missing or different?</summary>
+<div class="answer">
+<p>Nudge uses Apple Health data. On iPhone, open Health → Sharing → Apps and Services → Nudge and review access to Steps. Names can vary with your iOS version. Counts can differ while devices sync or Apple Health combines sources. Missing permission or incomplete history is not the same as zero activity.</p>
+</div>
+</details>
+<details>
+<summary>How do I install Nudge on my Watch?</summary>
+<div class="answer">
+<p>Open the Watch app on your paired iPhone, find Nudge under Available Apps, and choose Install. Open Nudge on the Watch and review its Health permissions. Keep both apps updated and give the devices time to sync.</p>
+</div>
+</details>
+<details>
+<summary>Where do I change reminders?</summary>
+<div class="answer">
+<p>In Nudge 2.1, open Settings → Notifications. Also check the device’s notification permissions and Focus settings. Some notification types and delivery behavior differ between iPhone and Watch.</p>
+</div>
+</details>
+</section>
+<section class="help-section" id="subscriptions">
+<h2>Nudge+ subscriptions</h2>
+<details>
+<summary>How do I restore or manage Nudge+?</summary>
+<div class="answer">
+<p>In Nudge 2.1, use the Nudge+ access controls in Settings and choose Restore Purchases. Use the Apple Account that made the purchase. Manage Subscription opens Apple’s subscription controls; you can also manage subscriptions in your Apple Account settings.</p>
+</div>
+</details>
+<details>
+<summary>Which plan has a free trial?</summary>
+<div class="answer">
+<p>The annual plan offers seven days free for eligible Apple Accounts, then US $19.99 per year unless canceled at least 24 hours before the trial ends. The US $2.99 monthly plan has no trial. Both have the same features and renew automatically unless canceled. Apple confirms price and eligibility in the app.</p>
+</div>
+</details>
+<details>
+<summary>Will canceling delete my progress?</summary>
+<div class="answer">
+<p>No. Free includes your underlying history, browsing, export, and deletion controls. Deeper insights and coaching reviews require active Nudge+. Your saved weekday plan is retained; after renewal, you can choose whether to restore it.</p>
+</div>
+</details>
+</section>
+<section class="help-section" id="weather-help">
+<h2>Walking weather</h2>
+<details>
+<summary>Why can’t I see Weather?</summary>
+<div class="answer">
+<p>Walking Weather is a Nudge+ feature in 2.1. Free has no weather tab, weather card, or weather requests. With active Nudge+, review Walking Forecast and your location preferences in Settings.</p>
+</div>
+</details>
+<details>
+<summary>How are walking conditions personalized?</summary>
+<div class="answer">
+<p>Set your preferences for temperature, rain, wind, daylight, and UV. Nudge uses the forecast and those preferences to identify walking windows. A favorable rating is guidance, not a guarantee of safe conditions. Check available official alerts and your surroundings.</p>
+</div>
+</details>
+<details>
+<summary>How often does the forecast update?</summary>
+<div class="answer">
+<p>Normal automatic and manual requests share an allowance of 30 successful refreshes per local day. Failed requests do not use that allowance. Current forecasts become eligible on app opening after 60 minutes, or on Weather entry/resume after 30 minutes. Pull to refresh normally has a 30-minute cooldown.</p>
+<p>Background timing depends on the operating system; eligibility is not a promise of delivery. An ordinary failed automatic request can delay automatic retries for three hours. An eligible manual refresh remains available. The last saved forecast stays visible when an update fails.</p>
+</div>
+</details>
+<details>
+<summary>Can I check Home while traveling?</summary>
+<div class="answer">
+<p>Yes. Home while Away refreshes are manual-only, at least three hours apart, with up to three successful updates each day included in the shared daily allowance. Returning Home shows the cached Home forecast; arrival itself does not fetch a new one.</p>
+</div>
+</details>
+<details>
+<summary>What location information leaves my device?</summary>
+<div class="answer">
+<p>Apple WeatherKit receives the coordinates used for forecasts; Apple’s geocoding service can receive a place or coordinates for location lookup. If you enable Additional U.S. alerts, the forecast point is also sent directly to NOAA. This optional feature starts off. <a href="privacy.html">Read the Privacy Policy</a>.</p>
+</div>
+</details>
+</section>
+<section class="help-section" id="history">
+<h2>Your history &amp; privacy</h2>
+<details>
+<summary>Can I export or delete my history without paying?</summary>
+<div class="answer">
+<p>Yes. In 2.1, open Settings → History &amp; Privacy. Prepare History Export creates a file you can share. Delete Nudge History removes Nudge’s daily and weekly history and queues the deletion for the paired Watch. Walking plans, settings, and forecast archives are separate.</p>
+<p>Deleting Nudge history does not delete original Apple Health records or previously shared exports. Clear Imported Health Context removes imported health snapshots on iPhone; allowed data may be imported again while Health access remains enabled.</p>
+</div>
+</details>
+<details>
+<summary>Can I use Nudge without an account?</summary>
+<div class="answer">
+<p>Nudge has no separate account or developer-operated cloud history service. Apple handles App Store purchases. You control Health and location permissions and choose whether to share exports.</p>
+</div>
+</details>
+</section>
+<section class="contact-card" id="contact">
+<p class="eyebrow">We’re here to help</p>
+<h2>Still need a hand?</h2>
+<a class="button" href="mailto:hello@nudgestep.com">Email hello@nudgestep.com</a>
+<p>Include your app version, device model, iOS/watchOS version, and a short description of what happened.</p>
+<p class="fine">Please remove health details and precise locations from screenshots. Don’t send full history exports, passwords, or payment information.</p>
+</section>
+</main>
+<footer class="site-footer container">
+<div class="footer-top">
+<a class="brand" href="index.html">
+<img src="assets/v21/nudgie.png" width="48" height="48" alt="">
+<span>Nudge.</span>
+</a>
+<p>A little encouragement. One walk at a time.</p>
+</div>
+<div class="footer-bottom">
+<p>© 2026 Nudge</p>
+<nav aria-label="Footer">
+<a href="whatsnew.html">What’s new</a>
+<a href="support.html">Support</a>
+<a href="privacy.html">Privacy</a>
+<a href="consumer-health-privacy.html">Consumer Health Data Privacy Policy</a>
+<a href="terms.html">Subscription &amp; terms</a>
+</nav>
+</div>
+<p class="fine">Nudge provides general wellness guidance. Walking times and forecasts are estimates. Screens show the upcoming Nudge 2.1 experience; features differ from version 1.3, available now.</p>
+</footer>
 </body>
 </html>
